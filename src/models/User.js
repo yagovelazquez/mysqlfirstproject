@@ -16,6 +16,8 @@ class User extends Model {
     this.hasMany(models.Address, { foreignKey: 'userId', as: 'addresses' });
     this.belongsToMany(models.Tech, { foreignKey: 'userId', through: 'userTechs', as: 'techs' });
   }
+
+
 }
 
 module.exports = User;

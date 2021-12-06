@@ -3,15 +3,24 @@
     <link rel="stylesheet" href="/users.css">
 </head>
 
-<body>
-    <div class="flex-container">
-    <div class="container">
-        <h1>JOIN US</h1>
-        <p class="lead">Enter your email to join others on our waitlist. We are 100% not a cult. </p>
-        <form method="POST" action='/register'>
-            <input type="text" class="form" name="email" placeholder="Enter Your Email">
-            <button>Join Now</button>
-        </form>
+<form action="/users" method="post">
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" name="name" />
     </div>
-</div>
-</body>
+    <div>
+        <label for="email">E-mail:</label>
+        <input type="email" name="email" />
+    </div>
+    <div>
+        <label for="password">password:</label>
+        <input type="password" name="password" />
+    </div>
+    <div>
+        <label for="birthday">Birthday:</label>
+        <input type="birthday" name="birthday" />
+    </div>
+    <div class="button">
+        <button type="submit">Sign Up</button>
+    </div>
+</form>
