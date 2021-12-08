@@ -1,0 +1,59 @@
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400" rel="stylesheet">
+    <link rel="stylesheet" href="/users.css">
+</head>
+
+<form action="/test" method="post">
+    <div>
+        <label for="Address">BITCH:</label>
+        <input type="Address" name="Address" />
+    </div>
+    <div class="button">
+        <button type="submit">Sign Up</button>
+    </div>
+</form>
+
+<h2></h2>
+
+<script>
+
+async function getUser() {
+        
+        let status 
+        const token = localStorage.getItem('x-auth-token')
+        console.log(token)
+
+
+        
+
+        const result = await fetch('/authUserTest', {
+            method: 'get',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-auth-token':  token
+            }
+        }).then(function (res){
+            status = res.status
+             return res.json()
+            }).catch(error => console.error('Error:', error))
+
+            if (status === 200) {
+            let header = document.querySelector("h2");
+           
+           header.innerText = result.name;
+            };
+           
+
+
+        
+
+  
+            
+        
+    }
+
+    getUser()
+
+</script>
+
+

@@ -1,0 +1,63 @@
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400" rel="stylesheet">
+    <link rel="stylesheet" href="/users.css">
+</head>
+<body>
+<form id="login"> 
+    <div>
+        <label for="email">E-mail:</label>
+        <input id="email" type="email" name="email" />
+    </div>
+    <div>
+        <label for="password">password:</label>
+        <input id="password" type="password" name="password" />
+    </div>
+    <div class="button">
+        <button type="submit" value="Submit Form">Sign In</button>
+    </div>
+</form>
+<h2 style="color: red"></h2>
+
+<script>
+    const form = document.getElementById('login')
+    form.addEventListener('submit', login)
+
+    async function login(event) {
+        event.preventDefault()
+        const email = document.getElementById('email').value
+        const password = document.getElementById('password').value
+        let status 
+
+        
+
+        const result = await fetch('/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({  
+                email,
+                password
+            })
+        }).then(function (res){
+            status = res.status
+             return res.json()
+            }).catch(error => console.error('Error:', error))
+           
+
+        if (status === 200) {
+            console.log('Got the token: ', result.token)
+            localStorage.setItem('x-auth-token', result.token)
+
+
+        
+            window.location.href = 'http://localhost:3000/users/me';
+
+        } else if (status === 400) {
+           let header = document.querySelector("h2");
+           header.innerText = result.error;
+            
+        }
+    }
+</script>
+</body>
