@@ -3,17 +3,18 @@
     <link rel="stylesheet" href="/users.css">
 </head>
 
-<form action="/test" method="post">
-    <div>
-        <label for="Address">BITCH:</label>
-        <input type="Address" name="Address" />
-    </div>
-    <div class="button">
-        <button type="submit">Sign Up</button>
-    </div>
-</form>
+<h2 id="name"></h2><h2 id="birthday"></h2><h2></h2>
 
-<h2></h2>
+<a href="/users/addresses/">
+    <button> Address</button>
+ </a>
+ 
+
+ <a href="http://www.google.com/">
+    <button> Technologies</button>
+ </a>
+
+
 
 <script>
 
@@ -34,23 +35,25 @@ async function getUser() {
             }
         }).then(function (res){
             status = res.status
+       
              return res.json()
             }).catch(error => console.error('Error:', error))
 
             if (status === 200) {
-            let header = document.querySelector("h2");
-           
-           header.innerText = result.name;
-            };
            
 
-
-        
-
-  
+            document.querySelector("#name").innerHTML = `Welcome ${result.name}` 
+            document.querySelector("#birthday").innerHTML = `You were born on ${result.birthday}`
             
+
+           
+           
+            };
+            if (status === 400) {
+
+           document.querySelector('html').innerHTML = `<h2>${result.error}</h2>`
         
-    }
+    }}
 
     getUser()
 

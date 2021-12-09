@@ -33,11 +33,11 @@ async authTest (req, res)  {
   
     try {
       const decoded = await jwt.verify(token, '1312421431');
-      req.user = decoded; 
+      console.log(decoded)
       res.send(decoded)
     }
     catch (ex) {
-      res.status(400).send('Invalid tokens.');
+      res.status(400).send('Invalid token.');
     }
 
     
@@ -48,9 +48,7 @@ async login (req,res) {
     return res.render("login");
 },
 
- foo (req,res) {
-  return res.send("FUDEU");
-}
+
 
 }
 

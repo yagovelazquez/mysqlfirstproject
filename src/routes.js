@@ -9,12 +9,14 @@ const AuthController = require('./controllers/AuthController');
 const AdressController = require('./controllers/AddressController');
 
 
+
+
 routes.get('/users', UserController.index)
 routes.post('/users', UserController.store)
 routes.get('/users/me', UserController.getUser)
 routes.get('/authUserTest', UserController.getUserAfter)
 
-routes.get('/api/foo', AuthController.foo)
+
 
 
 routes.get('/test', UserController.testrender)
@@ -24,8 +26,9 @@ routes.post('/login', AuthController.auth)
 routes.get('/login', AuthController.login)
 routes.get('/loginTest', AuthController.authTest)
 
-routes.post('/users/:UserId/adresses', AdressController.store)
-routes.get('/users/:UserId/adresses', AdressController.index)
+routes.post('/users/addresses', AdressController.store)
+routes.get('/users/addresses', AdressController.getAddress,AdressController.getAddressAfter)
+routes.get('/users/getaddresses', AdressController.getAddressAfter)
 
 
 

@@ -1,0 +1,77 @@
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400" rel="stylesheet">
+    <link rel="stylesheet" href="/users.css">
+</head>
+
+<h2></h2>
+
+
+
+<script>
+
+async function getUser() {
+        
+        let status 
+        const token = localStorage.getItem('x-auth-token')
+        console.log(token)
+
+
+        
+
+        const result = await fetch('/users/getaddresses', {
+            method: 'get',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-auth-token':  token
+            }
+        }).then(function (res){
+            status = res.status
+       
+             return res.json()
+            }).catch(error => console.error('Error:', error))
+
+            if (status === 200) {
+           
+
+            document.querySelector("h2").innerHTML = `Welcome ${result.address}` 
+     
+           
+            } else if (status === 404 ) {
+                
+
+           document.querySelector('html').innerHTML = `<head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400" rel="stylesheet">
+    <link rel="stylesheet" href="/users.css">
+     </head>
+<h2>${result.error}</h2>
+<form id="login"> 
+    <div>
+        <label for="Street">Street:</label>
+        <input id="Street" type="Street" name="Street" />
+    </div>
+
+    <div>
+        <label for="Number">Number:</label>
+        <input id="Number" type="Number" name="Number" />
+    </div>
+    
+    <div>
+        <label for="zip">Zip:</label>
+        <input id="zip" name="zip" type="text" pattern="[0-9]*">
+    </div>
+    <div class="button">
+        <button type="submit" value="Submit Form">Sign In</button>
+    </div>
+</form>`
+        
+    }  else {
+
+        document.querySelector('html').innerHTML = `<h2>${result.error}</h2>`
+        
+    }} 
+
+    getUser()
+
+</script>
+
+
