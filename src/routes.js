@@ -27,7 +27,7 @@ routes.get('/login', AuthController.login)
 routes.get('/loginTest', AuthController.authTest)
 
 routes.post('/users/addresses', AdressController.store)
-routes.get('/users/addresses', AdressController.getAddress,AdressController.getAddressAfter)
+routes.get('/users/addresses', AdressController.getAddress)
 routes.get('/users/getaddresses', AdressController.getAddressAfter)
 
 

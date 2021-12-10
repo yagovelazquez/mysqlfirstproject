@@ -16,6 +16,7 @@ module.exports = {
 
     const token = req.header('x-auth-token')
 
+
     if (!token) return res.status(401).send('Access denied. No token provided.');
     
     try {
@@ -23,7 +24,7 @@ module.exports = {
 
       const decoded = await jwt.verify(token, '1312421431');
 
-      console.log(decoded.id)
+
 
 
 
@@ -41,6 +42,7 @@ module.exports = {
     return  res.status(200).json({address: 'haha'})
     }
     catch (ex) {
+      
       res.status(400).json({error: 'Invalid Token'});
     }
 
@@ -60,21 +62,43 @@ module.exports = {
 
 
   async store(req, res) {
-    const { user_id } = req.params;
-    const { zipcode, street, number } = req.body;
 
-    const user = await User.findByPk(user_id);
+    console.log('AQUI')
+    
 
-    if (!user) {
-      return res.status(400).json({ error: 'User not found' });
+
+    const token = req.header('x-auth-token')
+
+    if (!token) return res.status(401).send('Access denied. No token provided.');
+    
+    try {
+      
+
+      const decoded = await jwt.verify(token, '1312421431');
+
+      console.log(decoded)
+      console.log(req.body)
+
+      // const { zip, street, number, id } = decoded
+
+
+
+      // const address = await Address.create({
+      //   zipcode,
+      //   street,
+      //   number,
+      //   user_id,
+      // });
+  
+
+      
+    return  res.status(200).json({address: 'haha'})
+    }
+    catch (ex) {
+      res.status(400).json({error: 'Invalid Token'});
     }
 
-    const address = await Address.create({
-      zipcode,
-      street,
-      number,
-      user_id,
-    });
+  
 
     return res.json(address);
   }

@@ -1,17 +1,37 @@
-<head>
+ <head id="header">
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400" rel="stylesheet">
     <link rel="stylesheet" href="/users.css">
-</head>
+    
+</head> 
 
-<h2></h2>
+
+<body>
+    
+</body>
+
+
+   
+
 
 
 
 <script>
 
+
+function openForm() {
+  document.getElementById("myForm").style.display = "flex";
+  document.getElementById("openAddressForm").style.display = "none";
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+  document.getElementById("openAddressForm").style.display = "inline";
+}
+
 async function getUser() {
         
-        let status 
+        let status
+        let status2 
         const token = localStorage.getItem('x-auth-token')
         console.log(token)
 
@@ -38,31 +58,53 @@ async function getUser() {
            
             } else if (status === 404 ) {
                 
+                
+               document.querySelector('body').innerHTML = `<%- include('./addressForm') %>`
+               document.querySelector('#error').innerHTML = result.error
+               document.head.innerHTML = ``
 
-           document.querySelector('html').innerHTML = `<head>
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400" rel="stylesheet">
-    <link rel="stylesheet" href="/users.css">
-     </head>
-<h2>${result.error}</h2>
-<form id="login"> 
-    <div>
-        <label for="Street">Street:</label>
-        <input id="Street" type="Street" name="Street" />
-    </div>
 
-    <div>
-        <label for="Number">Number:</label>
-        <input id="Number" type="Number" name="Number" />
-    </div>
-    
-    <div>
-        <label for="zip">Zip:</label>
-        <input id="zip" name="zip" type="text" pattern="[0-9]*">
-    </div>
-    <div class="button">
-        <button type="submit" value="Submit Form">Sign In</button>
-    </div>
-</form>`
+                                const form = document.getElementById('postAddress')
+                                form.addEventListener('submit', addressFetcher)
+
+                                async function addressFetcher(event) {
+                                    event.preventDefault()
+                                
+                                const street = document.getElementById('Street').value
+                                console.log(street)
+                                const number = document.getElementById('number').value
+                                const zipcode = document.getElementById('zip').value
+                               
+
+        
+
+                               const result2 = await fetch('/users/addresses', {
+                               method: 'POST',
+                               headers: {
+                               'Content-Type': 'application/json',
+                               'x-auth-token':  token
+                                },
+                                  body: JSON.stringify({  
+                                    street,
+                                    number,
+                                    zipcode
+                                
+                                 })
+                                }).then(function (res){
+                                    status2 = res.status
+                               return res.json()
+                               }).catch(error => console.error('Error:', error))
+                            }
+
+                            addressFetcher()
+
+
+
+                          
+                            
+                
+
+
         
     }  else {
 

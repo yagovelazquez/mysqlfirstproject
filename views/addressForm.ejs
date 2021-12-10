@@ -1,0 +1,31 @@
+
+  <link rel="stylesheet" href="/formAddress.css">
+  <h2 id="error"></h2>
+  <div class="form-popup" id="myForm">
+    <form id="postAddress" class="form-container">
+      <h1>Address</h1>
+
+             <div>
+                 <label for="street"><b>Street:</b></label>
+                 <input id="Street" type="text" placeholder="Enter Street" name="street" required />
+            </div>
+        
+             <div>
+                 <label for="number" type"hidden"><b>Number:</b></label>
+                 <input type"hidden" id="number" placeholder="Enter Number" type="text" name="number"  required/>
+            </div>
+            
+             <div>
+                 <label for="zip"><b>Zip:</b></label>
+                 <input id="zip" name="zip" type="text" placeholder="Enter Zip" pattern="[0-9]*" required>
+             </div>
+             <button type="submit" value="Submit Form" class="btn">Add Address</button>
+             <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+  
+    </form>
+  </div>
+
+  <button id="openAddressForm" class="open-button" onclick="openForm()"><b>Add a new Address</b></button>
+
+
+
